@@ -1,77 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Momentos</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+    <style>
+        /* Estilo básico para o tema claro */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --table-bg-color: #f2f2f2;
+            --border-color: #ddd;
+            --total-color: green;
+            --button-bg: #000000;
+            --button-text: #ffffff;
+        }
+
+        /* Estilo básico para o tema escuro */
+        .dark-theme {
+            --bg-color: #1e1e1e;
+            --text-color: #f5f5f5;
+            --table-bg-color: #333333;
+            --border-color: #444;
+            --total-color: #90ee90;
+            --button-bg: #ffffff;
+            --button-text: #000000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 10px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .theme-toggle {
+            display: block;
+            width: 100px;
+            margin: 0 auto 15px;
+            padding: 10px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--table-bg-color);
+        }
+
+        input[type="number"] {
+            width: 70px;
+        }
+
+        .total {
+            font-weight: bold;
+            color: var(--total-color);
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Ajustes para iPhone 13 */
+        @media (max-width: 390px) {
+            h1 {
+                font-size: 1.2em;
+            }
+            th, td {
+                padding: 6px;
+            }
+            input[type="number"] {
+                width: 60px;
+                font-size: 0.9em;
+            }
+            .total {
+                font-size: 1.2em;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class='container'>
-    <div class='polaroid'>
-      <div class='polaroid-img'>
-        <div class='gloss'></div>
-        <img src='https://64.media.tumblr.com/c24356484d6f767c8818e32832e88edf/146218998dfa224c-7f/s2048x3072/eac52b807de23b6b73be0277c86eeed19ad0adbf.jpg'>
-      </div>
-      <p>Familia</p>
-    </div>
-    <div class='polaroid'>
-      <div class='polaroid-img'>
-        <div class='gloss'></div>
-        <img src='https://64.media.tumblr.com/7bbcb3016c4491dbf33c8e7b5bf079a8/146218998dfa224c-64/s2048x3072/3645d6b3420827ab5d7ffabc6901bd0858cbfb63.jpg'>
-      </div>
-      <p>Primeiro churrasco</p>
-    </div>
-    <div class='polaroid'>
-      <div class='polaroid-img'>
-        <div class='gloss'></div>
-        <img src='https://64.media.tumblr.com/083638e1233bdb82e5ad160b5a7a5d3a/146218998dfa224c-1f/s1280x1920/2fe36b293b96b2ea02e4fd7e283ccbc3357d00fb.jpg'>
-      </div>
-      <p>Trabalhadora</p>
-    </div>
-    <!-- Novas Polaroids -->
-    <div class='polaroid'>
-      <div class='polaroid-img'>
-        <div class='gloss'></div>
-        <img src='https://64.media.tumblr.com/f3dc9c0bedd4e4991929db1c10aa2edd/146218998dfa224c-3b/s1280x1920/d8d432ce194694cb2c642f79e7bd9f61cfe39f14.jpg'>
-      </div>
-      <p>Boliche</p>
-    </div>
-    <div class='polaroid'>
-      <div class='polaroid-img'>
-        <div class='gloss'></div>
-        <img src='https://64.media.tumblr.com/34a946bcf61477ea28de257991ecd061/146218998dfa224c-67/s2048x3072/7001e9bb7e74164d107a67532c2a2bd0e1b2c23f.jpg'>
-      </div>
-      <p>Momentos</p>
-    </div>
-    <div class='polaroid'>
-      <div class='polaroid-img'>
-        <div class='gloss'></div>
-        <img src='https://64.media.tumblr.com/877f114ca7c637dc95e497cc51548125/146218998dfa224c-89/s1280x1920/e6115dd341de673488d8dd30734744825da1e31e.jpg'>
-      </div>
-      <p>Sorriso</p>
-    </div>
-    <div class='polaroid'>
-      <div class='polaroid-img'>
-        <div class='gloss'></div>
-        <img src='https://64.media.tumblr.com/1efb006bfb9053ac535afbfbfd20da78/146218998dfa224c-28/s2048x3072/c3b4514a44e569f6dccf593ab016f2309b67f68e.jpg'>
-      </div>
-      <p>Compromisso</p>
-    </div>
-  </div>
+    <h1>Lista de Compras</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">Light/Dark</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Preço Unitário (R$)</th>
+                <th>Quantidade</th>
+                <th>Total (R$)</th>
+            </tr>
+        </thead>
+        <tbody id="shoppingList">
+            <!-- A lista de itens será gerada aqui -->
+        </tbody>
+    </table>
+    <p class="total">Total da Compra: R$ <span id="grandTotal">0.00</span></p>
 
-  <!-- Botão de imprimir momentos -->
-  <div class='button-wrap'>
-    <button id="print-button">Imprimir Momentos</button>
-  </div>
+    <script>
+        // Lista de itens
+        const items = [
+            "Peito frango", "Leite", "Bacon", "Ovo", "Alho", "Peixe", "Absorvente",
+            "Desodorante", "KitKat", "Passarinho", "Chicken", "Gilete", "Sabão em pó",
+            "Maracujá", "Papel higiênico", "Requeijão", "Coxinha",
+            "Danette", "Sabonete", "Manteiga", "Desodorante 2", "Dananinho",
+            "Amaciante", "Queijo ralado", "Sabonete íntimo",
+            "Creme de leite",  "Salgadinho", "Pato", "Veja", "Torrada", "Chamyto", "Pinho", "Óleo", "Bolacha maizena",
+            "Papel toalha", "Chamyto 1","Cloro", "Desinfetante",
+            "Chamyto 2", "Sabão em pedra", "Arroz", "Cebola", "Tomate",
+            "Pão", "Limão", "Batata", "Sacola","Macarrao","Açucar","Bolo","paste denete","esponja",
+            "queijo ralado","Suquinho","Coquinha","Bolinho"
+            
+        ];
 
-  <!-- Script para mostrar o alerta -->
-  <script>
-    document.getElementById("print-button").addEventListener("click", function() {
-      alert("Impressão Feita com sucesso, Busque no quarto ao lado!");
-    });
-  </script>
+        // Função para criar a lista de itens
+        function createList() {
+            const shoppingList = document.getElementById("shoppingList");
+            items.forEach(item => {
+                const row = document.createElement("tr");
 
+                // Nome do item
+                const itemName = document.createElement("td");
+                itemName.textContent = item;
+                row.appendChild(itemName);
 
+                // Preço unitário
+                const itemPrice = document.createElement("td");
+                const priceInput = document.createElement("input");
+                priceInput.type = "number";
+                priceInput.value = 0;
+                priceInput.min = 0;
+                priceInput.step = 0.01;
+                priceInput.oninput = calculateTotal;
+                itemPrice.appendChild(priceInput);
+                row.appendChild(itemPrice);
+
+                // Quantidade
+                const itemQuantity = document.createElement("td");
+                const quantityInput = document.createElement("input");
+                quantityInput.type = "number";
+                quantityInput.value = 0;
+                quantityInput.min = 0;
+                quantityInput.oninput = calculateTotal;
+                itemQuantity.appendChild(quantityInput);
+                row.appendChild(itemQuantity);
+
+                // Total do item
+                const itemTotal = document.createElement("td");
+                itemTotal.classList.add("itemTotal");
+                itemTotal.textContent = "0.00";
+                row.appendChild(itemTotal);
+
+                shoppingList.appendChild(row);
+            });
+        }
+
+        // Função para calcular o total de cada item e o total geral
+        function calculateTotal() {
+            let grandTotal = 0;
+            const rows = document.querySelectorAll("#shoppingList tr");
+            rows.forEach(row => {
+                const price = parseFloat(row.children[1].querySelector("input").value) || 0;
+                const quantity = parseFloat(row.children[2].querySelector("input").value) || 0;
+                const total = price * quantity;
+                row.children[3].textContent = total.toFixed(2);
+                grandTotal += total;
+            });
+            document.getElementById("grandTotal").textContent = grandTotal.toFixed(2);
+        }
+
+        // Função para alternar o tema entre Light e Dark
+        function toggleTheme() {
+            document.body.classList.toggle("dark-theme");
+        }
+
+        // Inicializar a lista
+        createList();
+    </script>
 </body>
 </html>
